@@ -13,13 +13,6 @@ open X64.Bytes_Semantics
 
 #reset-options "--max_fuel 2 --initial_fuel 2 --max_ifuel 1 --initial_ifuel 1"
 
-(* Additional hypotheses, which should be added to the corresponding libraries at some point *)
-
-(* If two refs have the same address, and are in the heap, they are equal *)
-assume val ref_extensionality (#a:Type0) (#rel:Preorder.preorder a) (h:Heap.heap) (r1 r2:Heap.mref a rel) : Lemma 
-  (Heap.contains h r1 /\ Heap.contains h r2 /\ Heap.addr_of r1 = Heap.addr_of r2 ==> r1 == r2)
-
-
 (* Write a buffer in the vale memory *)
 
 let rec write_vale_mem (contents:Seq.seq UInt8.t) (length:nat{length = FStar.Seq.Base.length contents}) addr (i:nat{i <= length}) 
